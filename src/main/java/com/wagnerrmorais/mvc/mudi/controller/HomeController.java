@@ -20,7 +20,7 @@ public class HomeController {
   @GetMapping("/home")
   public String home(Model model) {
 
-    List<Pedido> pedidos = repository.getPedidos();
+    List<Pedido> pedidos = repository.findAll();
 
     model.addAttribute("pedidos", pedidos);
     return "home";
