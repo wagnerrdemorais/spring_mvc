@@ -1,24 +1,12 @@
-package com.wagnerrmorais.mvc.mudi.model;
+package com.wagnerrmorais.mvc.mudi.dto;
 
-import javax.persistence.*;
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import com.wagnerrmorais.mvc.mudi.model.Pedido;
 
-@Entity
-public class Pedido {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+public class RequisicaoNovoPedido {
 
   private String nomeProduto;
-  private BigDecimal valorNegociado;
-  private LocalDate dataEntrega;
-  @Lob
   private String urlProduto;
-  @Lob
   private String urlImagem;
-  @Lob
   private String descricao;
 
   public String getNomeProduto() {
@@ -27,22 +15,6 @@ public class Pedido {
 
   public void setNomeProduto(String nomeProduto) {
     this.nomeProduto = nomeProduto;
-  }
-
-  public BigDecimal getValorNegociado() {
-    return valorNegociado;
-  }
-
-  public void setValorNegociado(BigDecimal valorNegociado) {
-    this.valorNegociado = valorNegociado;
-  }
-
-  public LocalDate getDataEntrega() {
-    return dataEntrega;
-  }
-
-  public void setDataEntrega(LocalDate dataEntrega) {
-    this.dataEntrega = dataEntrega;
   }
 
   public String getUrlProduto() {
@@ -67,5 +39,14 @@ public class Pedido {
 
   public void setDescricao(String descricao) {
     this.descricao = descricao;
+  }
+
+  public Pedido toPedido() {
+    Pedido pedido = new Pedido();
+    pedido.setDescricao(descricao);
+    pedido.setNomeProduto(nomeProduto);
+    pedido.setUrlImagem(urlImagem);
+    pedido.setUrlProduto(urlProduto);
+    return pedido;
   }
 }
