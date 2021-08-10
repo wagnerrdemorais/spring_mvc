@@ -1,10 +1,25 @@
 <html>
     <head>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
         <meta charset="UTF-8">
     </head>
     <body>
         <div class="container">
+            <div class="jumbotron mb-0">
+                <h1 class="display-4">Meus Pedidos</h1>
+            </div>
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between mb-3">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="">Todos</a>
+                    <a class="nav-item nav-link" href="">Aguardando</a>
+                    <a class="nav-item nav-link" href="">Aprovado</a>
+                    <a class="nav-item nav-link" href="">Entregue</a>
+                </div>
+                <a href="/pedido/formulario"> <button class="btn btn-outline-secondary my-2 my-sm-0">Novo</button> </a>
+            </nav>
+
             <div class="card" th:each="pedido : ${pedidos}">
                 <div class="card-header" th:text="${pedido.nomeProduto}">Nome do produto</div>
                 <div class="card-body">
