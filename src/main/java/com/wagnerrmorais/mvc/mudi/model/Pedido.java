@@ -14,9 +14,7 @@ public class Pedido {
   private String nomeProduto;
   private BigDecimal valorNegociado;
   private LocalDate dataEntrega;
-  @Lob
   private String urlProduto;
-  @Lob
   private String urlImagem;
   @Lob
   private String descricao;

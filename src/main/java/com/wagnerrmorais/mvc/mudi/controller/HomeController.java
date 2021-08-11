@@ -17,7 +17,7 @@ public class HomeController {
     this.repository = pedidoRepository;
   }
 
-  @GetMapping("/home")
+  @GetMapping({"/home", "", "/"})
   public String home(Model model) {
 
     List<Pedido> pedidos = repository.findAll();
