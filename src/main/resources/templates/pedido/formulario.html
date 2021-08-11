@@ -1,14 +1,9 @@
 <html xmlns:th="https://www.thymeleaf.org">
-    <head>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <meta charset="UTF-8">
-    </head>
+    <head th:replace="~{base :: head}"></head>
     <body>
+    <div th:replace="~{base :: logo}"></div>
         <div class="container">
-            <div class="jumbotron mb-0">
-                <h1 class="display-4">Novo pedido</h1>
-            </div>
+            <div th:replace="~{base :: title('Novo pedido')}"></div>
             <div class="card mt-3">
                 <form th:object="${requisicaoNovoPedido}" class="card-body" action="/pedido/novo" method="POST">
                     <div class="form-group">
