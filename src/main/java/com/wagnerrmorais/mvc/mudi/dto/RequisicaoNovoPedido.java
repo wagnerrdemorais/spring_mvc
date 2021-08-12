@@ -1,6 +1,7 @@
 package com.wagnerrmorais.mvc.mudi.dto;
 
 import com.wagnerrmorais.mvc.mudi.model.Pedido;
+import com.wagnerrmorais.mvc.mudi.model.StatusPedido;
 
 import javax.validation.constraints.NotBlank;
 
@@ -53,6 +54,7 @@ public class RequisicaoNovoPedido {
     pedido.setNomeProduto(nomeProduto);
     pedido.setUrlImagem(urlImagem);
     pedido.setUrlProduto(urlProduto);
+    pedido.setStatus(StatusPedido.AGUARDANDO);
     return pedido;
   }
 }
