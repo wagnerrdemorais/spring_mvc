@@ -2,8 +2,11 @@ package com.wagnerrmorais.mvc.mudi.controller;
 
 import com.wagnerrmorais.mvc.mudi.dto.RequisicaoNovoPedido;
 import com.wagnerrmorais.mvc.mudi.model.Pedido;
+import com.wagnerrmorais.mvc.mudi.model.User;
 import com.wagnerrmorais.mvc.mudi.repository.PedidoRepository;
+import com.wagnerrmorais.mvc.mudi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +22,9 @@ public class PedidoController {
   @Autowired
   private PedidoRepository repository;
 
+  @Autowired
+  private UserRepository userRepository;
+
   @GetMapping("formulario")
   public String formulario(RequisicaoNovoPedido requisicaoNovoPedido) {
     return "pedido/formulario";
@@ -30,7 +36,11 @@ public class PedidoController {
       return "pedido/formulario";
     }
 
+    String username = SecurityContextHolder.getContext().getAuthentication().getName();
+    User user = userRepository.findByUsername(username);
+
     Pedido pedido = requisicaoNovoPedido.toPedido();
+    pedido.setUser(user);
     repository.save(pedido);
     return "redirect:/home";
   }

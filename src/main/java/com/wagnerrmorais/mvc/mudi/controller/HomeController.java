@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -23,8 +24,8 @@ public class HomeController {
   }
 
   @GetMapping
-  public String home(Model model) {
-    List<Pedido> pedidos = repository.findAll();
+  public String home(Model model, Principal principal) {
+    List<Pedido> pedidos = repository.findAllByUser(principal.getName());
     model.addAttribute("pedidos", pedidos);
     return "home";
   }

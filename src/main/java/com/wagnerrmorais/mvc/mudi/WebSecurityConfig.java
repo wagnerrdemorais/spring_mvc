@@ -29,26 +29,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginPage("/login")
                     .defaultSuccessUrl("/home", true)
                     .permitAll())
-                .logout(logout -> logout.logoutUrl("/logout"));
+                .logout(logout -> logout.logoutUrl("/logout"))
+                .csrf().disable();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//        String encodedPassword = encoder.encode("maria");
-//
-//        UserDetails user =
-//            User.withDefaultPasswordEncoder()
-//                .username("maria")
-//                .password(encodedPassword)
-//                .roles("ADM")
-//                .build();
-//
-//        System.out.println(encodedPassword);
-
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .passwordEncoder(encoder);
-//                .withUser(user);
     }
 }
