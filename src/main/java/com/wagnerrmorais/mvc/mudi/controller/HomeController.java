@@ -3,6 +3,8 @@ package com.wagnerrmorais.mvc.mudi.controller;
 import com.wagnerrmorais.mvc.mudi.model.Pedido;
 import com.wagnerrmorais.mvc.mudi.model.StatusPedido;
 import com.wagnerrmorais.mvc.mudi.repository.PedidoRepository;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -23,7 +25,12 @@ public class HomeController {
 
   @GetMapping
   public String home(Model model) {
-    List<Pedido> pedidos = repository.findByStatus(StatusPedido.ENTREGUE);
+
+    Sort sort = Sort.by("dataEntrega").ascending();
+
+    PageRequest pageRequest = PageRequest.of(0, 10, sort);
+
+    List<Pedido> pedidos = repository.findByStatus(StatusPedido.ENTREGUE, pageRequest);
     model.addAttribute("pedidos", pedidos);
     return "home";
   }
