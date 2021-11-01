@@ -1,5 +1,6 @@
 package com.wagnerrmorais.mvc.mudi.api;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.wagnerrmorais.mvc.mudi.model.Pedido;
 import com.wagnerrmorais.mvc.mudi.model.StatusPedido;
 import com.wagnerrmorais.mvc.mudi.repository.PedidoRepository;
@@ -22,7 +23,6 @@ public class PedidosRest {
     @GetMapping("aguardando")
     public List<Pedido> getPedidosAguardandoOfertas() {
         Sort sort = Sort.by("id").descending();
-
         PageRequest pageRequest = PageRequest.of(0, 10, sort);
 
         return pedidoRepository.findByStatus(StatusPedido.AGUARDANDO, pageRequest);

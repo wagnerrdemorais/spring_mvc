@@ -1,5 +1,7 @@
 package com.wagnerrmorais.mvc.mudi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -24,7 +26,8 @@ public class Pedido {
   @Enumerated(EnumType.STRING)
   private StatusPedido status;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JsonIgnore
   private User user;
 
   public String getNomeProduto() {
