@@ -1,34 +1,67 @@
-<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt" xmlns:th="http://www.thymeleaf.org" xmlns:v-bind="http://www.w3.org/1999/xhtml">
     <head th:replace="~{base :: head}"><title></title></head>
-    <body>
+    <body onload="onload()">
         <div th:replace="~{base :: logo}"></div>
-        <div class="container">
-            <div th:replace="~{base :: title('Últimos pedidos')}"></div>
-            <div class="card" th:each="pedido : ${pedidos}">
-                <div class="card-header alert-dark" th:text="${pedido.nomeProduto}">Nome do produto</div>
+        <div class="container" id="ofertas">
+            <div th:replace="~{base :: title('Faça sua oferta')}"></div>
+            <div class="card"   v-for="pedido in pedidos">
+                <div class="card-header alert-dark">{{pedido.nomeProduto}}</div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12 col-sm-8 mb-3">
                             <div class="row">
-                                <div class="col-md-5">Valor: <span th:if="${pedido.valorNegociado} != null" th:text="${'R$ ' + #numbers.formatDecimal(pedido.valorNegociado, 3, 'POINT', 2, 'COMMA')}">200,99</span></div>
-                                <div class="col-md-7">Data da entrega: <span th:text="${#temporals.format(pedido.dataEntrega, 'dd/MM/yyyy')}">10/02/2020</span></div>
+                                <div class="col-md-5">Valor: <input/> </div>
+                                <div class="col-md-7">Data da entrega: <input/> </div>
                             </div>
                             <div>Produto</div>
-                            <div><input class="form-control" th:value="${pedido.urlProduto}" value="url do produto"></div>
+                            <div><a v-bind:href="pedido.urlProduto">{{pedido.nomeProduto}}</a> </div>
 
                             <div>Descricao</div>
                             <div>
-                                <textarea class="form-control" th:text="${pedido.descricao}">descrição do pedido</textarea>
+                                <textarea class="form-control">{{pedido.descricao}}</textarea>
                             </div>
                         </div>
                         <div class="col-12 col-sm-4">
                             <div>
-                                <img class="img-thumbnail" th:src="${pedido.urlImagem}" src=""/>
+                                <img class="img-thumbnail" v-bind:src="pedido.urlImagem"/>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    <script>
+        function onload() {
+
+            var app = new Vue({
+                el: '#ofertas',
+                data: {
+                    pedidos: [
+                        {
+                            "id": 13,
+                            "nomeProduto": "Mijia 1c",
+                            "valorNegociado": null,
+                            "dataEntrega": null,
+                            "urlProduto": "https://www.banggood.com/pt/Xiaomi-Mijia-1C-2-in-1-Smart-Robot-Vacuum-Cleaner-Mop-Visual-Dynamic-Navigation-VSLAM,Brushless-Motor,2500Pa-2400mAH-with-APP-Control-p-1588864.html?utm_source=googleshopping&utm_medium=cpc_organic&gmcCountry=BR&utm_content=minha&utm_campaign=minha-br-pt-pc&currency=BRL&cur_warehouse=HK&createTmp=1&utm_source=googleshopping&utm_medium=cpc_bgs&utm_content=lt&utm_campaign=aliha-lt-ssc-br-cleaningappliances-7/16-xp&ad_id=534045083162&gclid=Cj0KCQjwiNSLBhCPARIsAKNS4_fk9O2L8kCRIxAf1pCMcx78RinXCjyT9fLlGalmX0XKaRaDo6XxWPEaAh94EALw_wcB",
+                            "urlImagem": "https://imgaz.staticbg.com/thumb/large/oaupload/ser1/banggood/images/C7/89/3735af96-359f-4d29-af9f-03c2ad8aaab6.jpg.webp",
+                            "descricao": "Marca: Xiaomi\r\nModelo: 1C\r\nMaterial: ABS + Metal\r\nTipos de limpeza: aspirador de pó\r\nFunção: Sucção, Varredura, Vácuo\r\nPoeira Caixa Capacidade: 600ml\r\nTanque de água Capacidade: 200ml\r\nSucção: 2500Pa\r\nPotência: 40W\r\nTensão: 110-240V 50 / 60Hz\r\nTempo de carregamento: 3-4 horas\r\nTempo de trabalho: 80-90 minutos",
+                            "status": "AGUARDANDO"
+                        },
+                        {
+                            "id": 12,
+                            "nomeProduto": "Gelatina",
+                            "valorNegociado": 15,
+                            "dataEntrega": "2021-08-25",
+                            "urlProduto": "https://www.magazineluiza.com.br/gelatina-sol-morango-25g/p/kh5k9jah8a/me/gltn/?&seller_id=jmacedo",
+                            "urlImagem": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTLrfr-N3QmjW-ahzvj4Is4FbKjQN-1K0Zpkxr6cepGLHHglladM4gEL3EOGVCX-jA3S7S5oLT3yEOKcxnqoQyZou7FTkTRMbsigqbX_LTJwRnz_yk-S6Fw&usqp=CAE",
+                            "descricao": "Gelatina Sol Morango 25g\r\nGelatina Sol Morango 25g\r\n\r\nPó para Gelatina Sabor Artificial de Morango Sol é uma mistura de ingredientes que, misturado com água, resulta em um produto final com aspecto de gel, de sabor agradável, que pode ser consumido em sua forma original ou combinado com outros ingredientes, resultando sempre em uma sobremesa de excelente qualidade.\r\n\r\nIngredientes: açúcar, gelatina, sal, reguladores de acidez (ácido fumárico e citrato trissódico), aromatizante, edulcorantes (ciclamato de sódio, aspartame e sacarina sódica) e corantes artificiais (amarelo crepúsculo e vermelho Bordeaux). Pode conter traço de corante artificial amarelo tartrazina.\r\n\r\nNÃO CONTÉM GLÚTEN. CONTÉM FENILALANINA.",
+                            "status": "AGUARDANDO"
+                        }
+                    ]
+                }
+            })
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     </body>
 </html>
