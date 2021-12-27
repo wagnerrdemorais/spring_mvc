@@ -5,6 +5,8 @@ import com.wagnerrmorais.mvc.mudi.model.Oferta;
 import com.wagnerrmorais.mvc.mudi.model.Pedido;
 import com.wagnerrmorais.mvc.mudi.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +19,8 @@ public class OfertasRest {
     @Autowired
     private PedidoRepository pedidoRepository;
 
-    public Oferta criaOferta(RequisicaoNovaOferta requisicaoNovaOferta) {
+    @PostMapping
+    public Oferta criaOferta(@RequestBody RequisicaoNovaOferta requisicaoNovaOferta) {
         Optional<Pedido> pedidoOptional = pedidoRepository.findById(requisicaoNovaOferta.getPedidoId());
         if(!pedidoOptional.isPresent()){
             return null;
