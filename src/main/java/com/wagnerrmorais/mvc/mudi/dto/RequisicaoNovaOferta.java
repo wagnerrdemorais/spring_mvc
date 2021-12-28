@@ -14,7 +14,7 @@ public class RequisicaoNovaOferta {
 
     private Long pedidoId;
 
-    @Pattern(regexp = "^\\d+(\\.\\d+{2})?$")
+    @Pattern(regexp = "\\d{0,2}(\\.\\d{1,2})?")
     @NotNull
     private String valor;
 
